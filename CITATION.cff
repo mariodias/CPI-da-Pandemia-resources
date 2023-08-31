@@ -1,4 +1,5 @@
 cff-version: 1.0.0
+type: dataset
 message: "If you use these resources in your project or research, please cite it as below."
 authors:
 - family-names: "Dias"
@@ -9,11 +10,3 @@ version: 1.0.1
 doi: 10.5281/zenodo.1234
 date-released: 2023-08-01
 url: "https://github.com/mariodias/CPI-da-Pandemia-resources"
-preferred-citation:
-  type: dataset
-  authors:
-- family-names: "Dias"
-  given-names: "Mario S A"
-  orcid: "https://orcid.org/0000-0000-0000-0000"
-  title: "Dataset e Recursos de apoio - Dissertação: CPI da Pandemia: A CPI dos Internautas"
-  year: 2023
