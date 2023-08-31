@@ -1,5 +1,5 @@
 # CPI da Pandemia resources
-Conjunto de recursos utilizados na minha dissertação de mestrado em ciência política.
+Conjunto de recursos utilizados na minha dissertação de mestrado em ciência política defendida em 2023.
 
 Este repositório contém a base de dados utilizada na pesquisa. A base de dados corresponde a dados de todos os tweets publicados pelos senadores titulares da CPI da Pandemia entre 2021-01-01 e 2021-12-31. Além do dataset, este repositório contém todos os métodos utilizados para as análises feitas na dissertação.
 
