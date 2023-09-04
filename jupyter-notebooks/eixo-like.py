@@ -111,4 +111,80 @@ def calcular_variancia_acumulada():
     dados_twitter_principal = pca.fit_transform(dados_twitter_padronizados)
 
     # Exiba os dados transformados com as novas variáveis principais
-    return(dados_twitter_principal)
+    return dados_twitter_principal
+
+"""O Scree Plot (também conhecido como gráfico Scree) é uma ferramenta gráfica usada em análises de Componentes Principais (PCA) e 
+Análise de Fatores para ajudar na determinação do número apropriado de componentes principais ou fatores a serem retidos."""
+def create_scree_plot(corr_matrix):
+   
+    # calcula a matriz de correlação entre as variáveis
+    corr_matrix = np.array(corr_matrix)
+
+    # calcula os autovalores e autovetores da matriz de correlação
+    autovalores, autovetores = np.linalg.eig(corr_matrix)
+
+    # ordena os autovalores em ordem decrescente
+    indices = np.argsort(autovalores)[::-1]
+    autovalores = autovalores[indices]
+
+    # cria um gráfico do Scree Plot
+    plt.plot(autovalores, 'o-', color='blue')
+    plt.axhline(y=1, color='red', linestyle='--')
+    plt.xlabel('Componentes Principais')
+    plt.ylabel('Autovalores')
+    #plt.title('Scree Plot - Critério de Kaiser')
+    plt.xticks(np.arange(len(autovalores)), np.arange(1, len(autovalores)+1))
+    plt.yticks(np.arange(0, np.max(autovalores)+1, 1))
+
+    # adiciona os valores dos autovalores no gráfico
+    for i, v in enumerate(autovalores):
+        plt.text(i, v + 0.1, "{:.2f}".format(v), ha="center")
+
+    plt.show()
+
+    return autovalores
+
+# Este método calcula as comunalidades da matriz.
+def calcular_comunalidades(corr_matrix):
+    # calcula a matriz de correlação entre as variáveis
+    corr_matrix = np.array(corr_matrix)
+
+    # calcula a diagonal principal da matriz de correlação
+    diagonal_principal = np.diag(corr_matrix)
+
+    # calcula as comunalidades de cada variável
+    comunalidades = np.sum(corr_matrix, axis=1) - diagonal_principal
+
+    return comunalidades
+
+# este método faz a extração dos componentes através de PCA.
+def extract_pca_component(df):
+   
+    # Selecionando apenas as colunas de interesse
+    data = df['likes_count', 'retweets_count', 'replies_count'].values
+
+    # Realizando a análise de componentes principais (PCA)
+    pca = PCA(n_components=1)
+    pca.fit(data)
+
+    # Extraindo o componente principal
+    component = pca.transform(data)
+
+    # Salvando o componente principal no dataframe
+    df["pca_component"] = component
+
+    # Retornando o dataframe com o componente principal adicionado
+    return df
+
+# este método normaliza o meu PCA component em valores entre 0 e 1.
+def normalize_component(df):
+   
+    # Extrai o componente/fator
+    component = df["pca_component"]
+    # Normaliza o componente para valores entre 0 e 1
+    scaler = MinMaxScaler()
+    normalized_component = scaler.fit_transform(component.values.reshape(-1, 1))
+    # Adiciona o componente normalizado como uma nova coluna no dataframe
+    df[f"{component_col_name}_normalized"] = normalized_component
+
+   return df
