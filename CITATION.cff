@@ -2,7 +2,7 @@ cff-version: 1.0.0
 type: dataset
 message: "If you use these resources in your project or research, please cite it as below."
 authors:
-- family-names: "Dias"
+- family-names: "DIAS"
   given-names: "Mario S A"
   orcid: "https://orcid.org/0000-0003-0399-6344"
 title: "Dataset e Recursos de apoio - Dissertação: CPI da Pandemia: A CPI dos Internautas"
